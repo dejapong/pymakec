@@ -1,6 +1,7 @@
 from .cbase import CGeneratorBase
+from .cstringmixin import CStringMixin
 
-class CBlockGenerator(CGeneratorBase):
+class CBlockGenerator(CGeneratorBase, CStringMixin):
 
     def __init__(self):
         super().__init__()
@@ -21,7 +22,7 @@ class CBlockGenerator(CGeneratorBase):
         return item
 
     def addFor(self, iType="int", iName="i", iValue=0, iLimit=1, iStride=1, expr=None):
-        item = CForGenerator(iType,iName,iValue,iLimit,iStride,expr)
+        item = CForGenerator(iType, iName, iValue, iLimit, iStride,expr)
         self.add(item)
         return item
 
