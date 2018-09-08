@@ -1,5 +1,4 @@
 from .cblock import CBlockGenerator
-from collections import namedtuple
 
 class CFunctionGenerator(CBlockGenerator):
 
