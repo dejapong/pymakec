@@ -8,7 +8,6 @@ class CHeaderGenerator():
         self.indentLvl = 0
 
     def add(self, item):
-        # TODO check type
         self._items.append(item)
 
     def addFunction(self, returnType, name, argumentList):
