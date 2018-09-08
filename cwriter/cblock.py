@@ -20,6 +20,11 @@ class CBlockGenerator(CGeneratorBase):
         self.add(item)
         return item
 
+    def addFor(self, iType="int", iName="i", iValue=0, iLimit=1, iStride=1, expr=None):
+        item = CForGenerator(iType,iName,iValue,iLimit,iStride,expr)
+        self.add(item)
+        return item
+
     def addCall(self, funcName, params):
         item = "{}({});\n".format(funcName, ", ".join(params))
         self.add(item)
@@ -41,3 +46,4 @@ class CBlockGenerator(CGeneratorBase):
 from .cif import CIfGenerator
 from .celseif import CElseIfGenerator
 from .celse import CElseGenerator
+from .cfor import CForGenerator

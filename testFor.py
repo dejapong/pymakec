@@ -12,7 +12,6 @@ func1 = cfile.addFunction("int", "main", ["int argc", "const char** argv"])
 func1.add("/* You can always just add strings like this */\n")
 func1.addComment("Better to add comments this way though")
 func1.addCall("sayHello", [wrapString(" Hello \"World\" ")])
-
 func1.addReturn(0)
 
 func2 = cfile.addFunction("void", "sayHello", ["const char* helloStr"])
@@ -21,9 +20,9 @@ ifa = func2.addIf("helloStr != NULL")
 ifb = ifa.addIf("strlen(helloStr) > 80")
 ifb.addCall("printf", [ wrapString("%s\n"), wrapString("Text is too long to print")])
 elsif = ifa.addElseIf("strlen(helloStr)")
-elsif.addCall("printf", [ wrapString("%s\n"), "helloStr"])
+fora = elsif.addFor("int", "i", 0, 3)
+fora.addCall("printf", [ wrapString("%s\n"), "helloStr"])
 elsa = ifa.addElse()
-
 elsa.addCall("printf", [ wrapString("%s\n"), wrapString("Input string is empty")])
 cfile.add(func2.generateDeclaration(), before=func1)
 
