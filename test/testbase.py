@@ -1,21 +1,22 @@
 import subprocess
-from cwriter import CFileGenerator, CForGenerator, wrapString
+from cwriter import *
 
 class TestHarness:
 
   def createCFile(self):
-    cfile = CFileGenerator()
-    cfile.addInclude("stdio.h", True)
-    cfile.addInclude("string.h", True)
-    return cfile
+    c = cfile([
+      cinclude("stdio.h", True),
+      cinclude("string.h", True),
+    ])
+    return c
 
-  def runCFile(self, cfile):
+  def runCFile(self, c):
     basename = type(self).__name__ + ".test";
     execname = basename;
     srcname = basename + ".c";
 
     # Convert codelist to string.
-    codeString = cfile.generate();
+    codeString = c.generate();
 
     # Print code to output source file
     outfile = open(srcname,'w');

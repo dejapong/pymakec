@@ -1,15 +1,17 @@
 import unittest
-from cwriter import CForGenerator
+from cwriter import *
 from test.testbase import TestHarness
 
 class TestCForGenerator(unittest.TestCase, TestHarness):
 
     def testDefault(self):
-        cfile = self.createCFile()
-        func_ = cfile.addFunction("int", "main", ["int argc", "const char** argv"])
-        for_ = func_.addFor(iLimit = 4)
-        for_.addPrintf("%d, ", "i")
-        self.assertEqual(self.runCFile(cfile), "0, 1, 2, 3,")
+        cf = self.createCFile()
+        cf.add(cfunction("int", "main", ["int argc", "const char** argv"],[
+            cfor(iLimit = 4, items = [
+                cprintf("%d, ", "i")
+            ])
+        ]))
+        self.assertEqual(self.runCFile(cf), "0, 1, 2, 3,")
 
 if __name__ == '__main__':
     unittest.main()

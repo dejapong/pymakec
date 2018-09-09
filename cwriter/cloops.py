@@ -1,9 +1,9 @@
-from .cblock import CBlockGenerator
+from .cblocks import cblock
 
-class CForGenerator(CBlockGenerator):
+class cfor(cblock):
 
-    def __init__(self, iType="int", iName="i", iValue=0, iLimit=1, iStride=1, expr=None):
-        super().__init__()
+    def __init__(self, iType="int", iName="i", iValue=0, iLimit=1, iStride=1, expr=None, items=[]):
+        super().__init__(items)
         if expr is not None:
           self.expr = expr
         else:
@@ -13,5 +13,5 @@ class CForGenerator(CBlockGenerator):
         return "{}for ( {} )\n{}".format(
             self.getIndentStr(-1),
             self.expr,
-            super(CForGenerator, self).generate()
+            super(cfor, self).generate()
         )
