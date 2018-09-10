@@ -31,6 +31,6 @@ class TestHarness:
         p = subprocess.call(cmd);
         self.assertEqual(p, 0);
 
-    def runCFile(self, c):
-        output = subprocess.check_output(["./"+self._getBaseName()])
+    def runCFile(self, c, args = []):
+        output = subprocess.check_output(["./"+self._getBaseName()] + args)
         return output.decode('UTF-8').strip()
