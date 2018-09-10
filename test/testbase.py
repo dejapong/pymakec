@@ -3,30 +3,34 @@ from pymakec import *
 
 class TestHarness:
 
-  def createCFile(self):
-    c = cfile([
-      cinclude("stdio.h", True),
-      cinclude("string.h", True),
-    ])
-    return c
+    def _getBaseName(self):
+        return type(self).__name__ + ".test"
 
-  def runCFile(self, c):
-    basename = type(self).__name__ + ".test";
-    execname = basename;
-    srcname = basename + ".c";
+    def createCFile(self):
+        c = cfile([
+          cinclude("stdio.h", True),
+          cinclude("string.h", True),
+        ])
+        return c
 
-    # Convert codelist to string.
-    codeString = c.generate();
+    def compileCFile(self, c):
+        basename = self._getBaseName()
+        execname = basename;
+        srcname = basename + ".c";
 
-    # Print code to output source file
-    outfile = open(srcname,'w');
-    outfile.write(codeString);
-    outfile.close();
+        # Convert codelist to string.
+        codeString = c.generate();
 
-    cmd = ["gcc", srcname, "-o", execname];
+        # Print code to output source file
+        outfile = open(srcname,'w');
+        outfile.write(codeString);
+        outfile.close();
 
-    p = subprocess.call(cmd);
-    self.assertEqual(p, 0);
+        cmd = ["gcc", srcname, "-o", execname];
 
-    output = subprocess.check_output(["./"+execname])
-    return output.decode('UTF-8').strip()
+        p = subprocess.call(cmd);
+        self.assertEqual(p, 0);
+
+    def runCFile(self, c):
+        output = subprocess.check_output(["./"+self._getBaseName()])
+        return output.decode('UTF-8').strip()
