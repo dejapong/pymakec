@@ -1,5 +1,5 @@
 import subprocess
-from cwriter import *
+from pymakec import *
 
 class TestHarness:
 

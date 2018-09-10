@@ -1,5 +1,5 @@
 #!/usr/local/bin/python3
-from cwriter import *
+from pymakec import *
 
 cf = cfile()
 

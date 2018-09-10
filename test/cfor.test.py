@@ -1,5 +1,5 @@
 import unittest
-from cwriter import *
+from pymakec import *
 from test.testbase import TestHarness
 
 class TestCForGenerator(unittest.TestCase, TestHarness):
