@@ -2,9 +2,9 @@ import unittest
 from pymakec import *
 from test.testbase import TestHarness
 
-class TestCIf(unittest.TestCase, TestHarness):
+class TestCIf(TestHarness, unittest.TestCase):
 
-    def testDefault(self):
+    def testCIf(self):
         cf = self.createCFile()
         cf.add(cfunction("int", "main", ["int argc", "const char** argv"],[
             cif("argc > 4", [
@@ -23,7 +23,8 @@ class TestCIf(unittest.TestCase, TestHarness):
             ]),
             celse([
                 cprintf("%s", cstring("No Arguments"))
-            ])
+            ]),
+            creturn(0)
         ]))
         self.compileCFile(cf)
 

@@ -3,6 +3,9 @@ from pymakec import *
 
 class TestHarness:
 
+    def setUp(self):
+        print (self._testMethodName)
+
     def _getBaseName(self):
         return type(self).__name__ + ".test"
 

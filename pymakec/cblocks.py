@@ -22,8 +22,7 @@ class cfunction(cblock):
         self.argumentList = argumentList
 
     def generatePrototype(self) :
-        return "\n{indentStr}{ret} {name} ({argList})".format(
-            indentStr = self.getIndentStr(-1),
+        return "\n{ret} {name} ({argList})".format(
             ret = self.returnType,
             name = self.name,
             argList = ", ".join(self.argumentList))

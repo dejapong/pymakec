@@ -5,12 +5,12 @@ class cbase():
         self.indentLvl = 0
         self.indentAmt = 2
 
-    def _generateOrUse(self, item):
+    def generateOrUse(self, item):
         if hasattr(item, "generate"):
             item.indentLvl = self.indentLvl + 1
             return item.generate()
         else:
-            return self.getIndentStr() + item
+            return self.getIndentStr() + item.lstrip()
 
     def getIndentStr(self, offset = 0) :
         return " " * self.indentAmt * (self.indentLvl + offset)
@@ -47,5 +47,5 @@ class cbase():
         pass
 
     def generate(self):
-        indentedLines = [ self._generateOrUse(item) for item in self.items ]
+        indentedLines = [ self.generateOrUse(item) for item in self.items ]
         return "".join(indentedLines)
